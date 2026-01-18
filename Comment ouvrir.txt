@@ -1,0 +1,93 @@
+===============================================================
+   CLINIQUE MÉDICALE - GUIDE D'INSTALLATION
+===============================================================
+
+Salut ! Suivez ces étapes exactement pour faire fonctionner le projet Clinique Médicale sur votre ordinateur.
+
+Ce projet se compose de 3 parties principales :
+1. La Base de Données (SQL Server)
+2. Le Microservice (Backend Python)
+3. Le Site Web (Django)
+
+---------------------------------------------------------------
+PHASE 1 : INSTALLER LES PRÉREQUIS
+---------------------------------------------------------------
+Avant de commencer, assurez-vous d'avoir installé :
+1. Python : https://www.python.org/downloads/
+   (Assurez-vous de cocher "Add Python to PATH" pendant l'installation)
+2. SQL Server Express (Le moteur de base de données)
+3. SSMS (SQL Server Management Studio - pour voir la base de données)
+
+---------------------------------------------------------------
+PHASE 2 : CONFIGURER LA BASE DE DONNÉES
+---------------------------------------------------------------
+1. Ouvrez "SQL Server Management Studio" (SSMS).
+2. Connectez-vous à votre serveur local.
+   IMPORTANT : Copiez le "Nom du serveur" (Server Name) dans la fenêtre de connexion (ex: LAPTOP-XYZ\SQLEXPRESS).
+   Vous aurez besoin de ce nom pour la Phase 3.
+3. Dans SSMS, allez dans Fichier > Ouvrir > Fichier... (File > Open > File...)
+4. Sélectionnez le fichier "setup_database.sql" inclus dans ce dossier de projet.
+5. Cliquez sur le bouton "Exécuter" (Execute) ou appuyez sur F5.
+   -> Cela crée la base "DoctorServiceDB" et la remplit avec les données des médecins.
+
+---------------------------------------------------------------
+PHASE 3 : CONFIGURER LE PROJET
+---------------------------------------------------------------
+1. Ouvrez le fichier "config.py" dans ce dossier avec un éditeur de texte (Bloc-notes ou VS Code).
+2. Cherchez cette ligne :
+   'server': r'WALIDD\SQLEXPRESS'
+3. Effacez "WALIDD\SQLEXPRESS" et collez VOTRE Nom de Serveur que vous avez copié lors de la Phase 2.
+   Exemple : 'server': r'MON-PC\SQLEXPRESS'
+4. Enregistrez le fichier.
+
+---------------------------------------------------------------
+PHASE 4 : INSTALLER LES LIBRAIRIES PYTHON
+---------------------------------------------------------------
+1. Ouvrez votre terminal (Invite de commandes ou PowerShell).
+2. Naviguez vers ce dossier de projet.
+   (Astuce : Faites un clic droit dans le dossier et choisissez "Ouvrir dans le terminal").
+3. Lancez cette commande pour installer les outils nécessaires :
+   pip install -r requirements.txt
+
+---------------------------------------------------------------
+PHASE 5 : LANCER L'APPLICATION (DERNIÈRE ÉTAPE)
+---------------------------------------------------------------
+Comme c'est une architecture microservice, vous devez avoir DEUX terminaux ouverts.
+
+TERMINAL 1 (Le Microservice) :
+------------------------------
+1. Ouvrez un terminal dans le dossier du projet.
+2. Lancez cette commande :
+   python server.py
+3. Vous devriez voir : "Microservice is running..."
+   -> NE FERMEZ PAS CETTE FENÊTRE.
+
+TERMINAL 2 (Le Site Web) :
+-------------------------
+1. Ouvrez un SECOND terminal dans le dossier du projet.
+2. Lancez cette commande :
+   cd django\clinic_platform
+puir la commande :
+   python manage.py runserver
+3. Vous devriez voir : "Starting development server at http://127.0.0.1:8000/"
+
+---------------------------------------------------------------
+COMMENT UTILISER
+---------------------------------------------------------------
+Ouvrez votre navigateur web (Chrome/Edge) et allez sur :
+http://127.0.0.1:8000/
+
+Identifiants de connexion (si créés) :
+Nom d'utilisateur : admin
+Mot de passe : (Celui que vous avez créé, ou créez un compte via 'S'inscrire')
+
+===============================================================
+DÉPANNAGE (TROUBLESHOOTING)
+===============================================================
+- Erreur : "Connection refused"
+  Solution : Assurez-vous que le Terminal 1 (server.py) est bien lancé.
+
+- Erreur : "Login failed for user..."
+  Solution : Vérifiez votre fichier config.py. Le nom de votre ordinateur est peut-être différent.
+
+- Erreur : "
